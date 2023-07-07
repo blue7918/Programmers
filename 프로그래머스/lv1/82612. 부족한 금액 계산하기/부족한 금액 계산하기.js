@@ -1,11 +1,11 @@
 function solution(price, money, count) {
-    function factorial(n) {
+    const cal = (n) => {
       let result = 0;
         for (let i = 1; i <= n; i++) {
         result = result + i * price;
       }
       return result;
     }
-    let result = factorial(count);
+    let result = cal(count);
     return result > money ? result - money : 0 
 }
