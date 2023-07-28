@@ -1,18 +1,9 @@
 function solution(s) {
-    let stack = [];
-    let ans = [];
-    
-    [...s].forEach((str) => {
-        if(!stack.includes(str)){
-            ans.push(-1);
-        }
-              
-        if(stack.includes(str)){
-            ans.push(stack.length - stack.lastIndexOf(str));
-        }
-                   
-        stack.push(str);
-    })
-    
-    return ans;
+    var answer = [];
+    let check = {};
+    for(let i =0 ; i<s.length;i++){
+        check[s[i]] === undefined ? answer[i] = -1 : answer[i] = i - check[s[i]];
+        check[s[i]] = i;
+    }
+    return answer;
 }
