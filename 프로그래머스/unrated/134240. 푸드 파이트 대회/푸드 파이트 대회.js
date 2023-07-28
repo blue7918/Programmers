@@ -1,10 +1,9 @@
 function solution(food) {
     var answer = '';
     for(let i = 1; i < food.length ; i++){
-        let repeatNum = food[i] / 2;
-        answer += i.toString().repeat(repeatNum);
+        answer += i.toString().repeat(food[i] / 2);
     }
-    answer += '0' + answer.split("").reverse().join("");
-    
-    return answer;
+    //answer += '0' + answer.reverse().join("");
+    //return answer;
+    return answer + '0' + [...answer].reverse().join('');
 }
