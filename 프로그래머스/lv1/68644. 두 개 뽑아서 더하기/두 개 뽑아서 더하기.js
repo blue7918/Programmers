@@ -6,7 +6,6 @@ function solution(numbers) {
             
         }
     }
-    let result = [...new Set(array)];
-    result.sort((a,b)=>a-b)
+    let result = [...new Set(array)].sort((a,b)=>a-b);
     return result;
 }
