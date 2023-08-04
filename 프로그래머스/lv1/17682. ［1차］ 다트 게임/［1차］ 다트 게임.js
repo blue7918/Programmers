@@ -20,5 +20,5 @@
             }else answer[answerIndex -1] *= 2;
         } else if( char === '#') answer[answerIndex -1] *= (-1);
     }
-    return answer.reduce((acc, val) => {return acc + val});
+    return answer.reduce((a,b)=>a+b,0)
 }
