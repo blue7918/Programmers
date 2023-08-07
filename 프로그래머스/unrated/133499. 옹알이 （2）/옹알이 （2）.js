@@ -3,7 +3,7 @@ function solution(babbling) {
 
   for (let word of babbling) {
     if (/(aya|ye|woo|ma)\1+/g.test(word)) continue;
-    if (/^(aya|ye|woo|ma)+$/g.test(word)) {
+    else if (/^(aya|ye|woo|ma)+$/g.test(word)) {
       answer++;
     }
   }
