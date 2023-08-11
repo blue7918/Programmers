@@ -5,11 +5,6 @@ function solution(survey, choices) {
     if (choices[i] < 4) table[survey[i][0]] += Math.abs(4 - choices[i]);
     else if (choices[i] > 4) table[survey[i][1]] += Math.abs(4 - choices[i]);
   }
-     table = Object.entries(table); //배열로 변경해줌
-  for (let i = 0; i < 7; i += 2) {
-      console.log(table[i])
-    if (table[i][1] < table[i + 1][1]) result = result.concat(table[i + 1][0]);
-    else result = result.concat(table[i][0]);
-  }
-  return result;
+const { R, T, C, F, J, M, A, N } = table
+    return `${R >= T ? 'R' : 'T'}${C >= F ? 'C' : 'F'}${J >= M ? 'J' : 'M'}${A >= N ? 'A' : 'N'}`
 }
