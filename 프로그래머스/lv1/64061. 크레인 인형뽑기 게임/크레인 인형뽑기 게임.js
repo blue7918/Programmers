@@ -1,26 +1,49 @@
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
 function solution(board, moves) {
-    const basket = [];
-    let result = 0;
-    moves.forEach(order => {
-        const doll = pickup(board, order-1);
-        if(doll){
-            if(basket[basket.length-1] === doll){
-                basket.pop();
-                result +=2;
-            }else{
-                basket.push(doll);
+
+    var count =0;
+    var stack = [];
+
+    for(var i=0;i<moves.length;i++){
+        var now = moves[i]-1
+        for(var j=0;j<board.length;j++){
+            if(board[j][now]!=0){
+                if(stack[stack.length-1]===board[j][now]){
+                    stack.pop();
+                    count+=2;
+                }
+                else{
+                    stack.push(board[j][now])
+                }
+                board[j][now] = 0;
+                break;
             }
         }
-    });
-    return result;
-}
-
-function pickup(board, order){
-    for(let i = 0; i < board.length ; i++){
-        if(board[i][order] !== 0){
-            const doll = board[i][order];
-            board[i][order]= 0;
-            return doll;
-        }
     }
+    console.log(stack)
+    return count
 }
