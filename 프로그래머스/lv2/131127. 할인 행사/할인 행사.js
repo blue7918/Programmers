@@ -1,21 +1,17 @@
 function solution(want, number, discount) {
     let result = 0
-    discount.forEach((v,i)=>{
+     for (let i = 0; i < discount.length - 9; i++) {
+        const check = discount.slice(i, i+10);
 
-     let copy=[...discount].slice(i,i+10)
-     if(copy.length<10)return result
-
-     let flag=0
-     for(let j=0;j<want.length;j++){
-      if([...copy].filter(el=>el==want[j]).length==number[j]) 
-       flag++
-
-      else break
-     }
-
-     if(flag==want.length)result++
-
-  })
+        let flag = true;
+        for (let j = 0; j < want.length; j++) {
+            if (check.filter(item => item === want[j]).length !== number[j]) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) result += 1;
+    }
 
     return result
 }
