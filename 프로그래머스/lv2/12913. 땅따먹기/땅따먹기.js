@@ -1,8 +1,18 @@
 function solution(land) {
-    for (let i = 1; i < land.length; i++) {
-        for (let j = 0; j < 4; j++) {
-            land[i][j] += Math.max(...land[i - 1].filter((_, _i) => j !== _i));
-        }
+    let answer = 0;
+    
+    for(let i = 0; i < land.length; i++){
+       for(let j = 0; j < 4; j++){
+           if(i === 0){
+               continue;
+           } else {
+               let arr = land[i-1].slice();
+               arr[j] = 0;
+               land[i][j] += Math.max.apply(null, arr);
+               answer = Math.max(land[i][j], answer);
+           }
+       }       
     }
-    return Math.max(...land.pop());
+    
+    return answer;
 }
