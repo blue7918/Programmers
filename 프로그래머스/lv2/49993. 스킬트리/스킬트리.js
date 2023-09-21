@@ -13,6 +13,5 @@
 // }
 
 function solution(skill, skill_trees) {
-    const skills = skill.split('');
-    return skill_trees.filter(tree => skill.indexOf(tree.split('').filter(s => skills.includes(s)).join('')) === 0).length;
+    return skill_trees.filter(tree => skill.indexOf(tree.split('').filter(s => skill.split('').includes(s)).join('')) === 0).length;
 }
