@@ -1,17 +1,13 @@
-// function solution(skill, skill_trees) {
-//     function isCorrect(n) {
-//         let test = skill.split('');
-//         for (var i = 0; i < n.length; i++) {
-//             if (!skill.includes(n[i])) continue;
-//             if (n[i] === test.shift()) continue;
-//             return false;
-//         }
-//         return true;
-//     }    
-
-//     return skill_trees.filter(isCorrect).length;
-// }
-
 function solution(skill, skill_trees) {
-    return skill_trees.filter(tree => skill.indexOf(tree.split('').filter(s => skill.split('').includes(s)).join('')) === 0).length;
+    function isCorrect(tree) {
+        let temp = skill.split('');
+        for (let i = 0; i < tree.length; i++) {
+            if (!skill.includes(tree[i])) continue; //해당 문자가 skill에 포함되어있지 않음
+            if (tree[i] === temp.shift()) continue; //skill을 순서대로 하나씩 제거해가며 확인
+            return false;
+        }
+        return true;
+    }    
+
+    return skill_trees.filter(isCorrect).length;
 }
