@@ -6,7 +6,7 @@ function isPrime(n) {
 	return true;
 }
 
-function dfs(set, arr, fixed) {
+function makeNum(set, arr, fixed) {
 	if (arr.length >= 1) {
 		for (let i = 0; i < arr.length; i++) {
 			let newFixed = fixed + arr[i];
@@ -14,7 +14,7 @@ function dfs(set, arr, fixed) {
 			copyArr.splice(i, 1);
 
 			if (isPrime(parseInt(newFixed))) set.add(parseInt(newFixed));
-			dfs(set, copyArr, newFixed);
+			makeNum(set, copyArr, newFixed);
 		}
 	}
 }
@@ -23,6 +23,7 @@ function solution(numbers) {
 	let nums = numbers.split("");
 	let set = new Set();
 
-	dfs(set, nums, '');
+    
+	makeNum(set, nums, '');
 	return set.size;
 }
