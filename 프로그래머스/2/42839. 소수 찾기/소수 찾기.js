@@ -6,24 +6,24 @@ function isPrime(n) {
 	return true;
 }
 
-function makeNum(set, arr, fixed) {
+function makeNum(answer, arr, fixed) {
 	if (arr.length >= 1) {
 		for (let i = 0; i < arr.length; i++) {
 			let newFixed = fixed + arr[i];
 			let copyArr = [...arr];
 			copyArr.splice(i, 1);
 
-			if (isPrime(parseInt(newFixed))) set.add(parseInt(newFixed));
-			makeNum(set, copyArr, newFixed);
+			if (isPrime(parseInt(newFixed))) answer.add(parseInt(newFixed));
+			makeNum(answer, copyArr, newFixed);
 		}
 	}
 }
 
 function solution(numbers) {
 	let nums = numbers.split("");
-	let set = new Set();
+	let answer = new Set();
 
     
-	makeNum(set, nums, '');
-	return set.size;
+	makeNum(answer, nums, '');
+	return answer.size;
 }
