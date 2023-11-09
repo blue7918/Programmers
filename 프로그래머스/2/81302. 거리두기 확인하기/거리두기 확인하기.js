@@ -1,49 +1,37 @@
 function solution(places) {
-    let answer = [];
-    
-    const inBound = val => val >= 0 && val < 5;
-    
-    for(const place of places){
-        place.map((row, idx) => {
-            place[idx] = row.split('');
-        });
-        
-        const isPerson = (r,c) => place[r][c] === 'P';
-        const isEmpty = (r,c) => place[r][c] === 'O';
-        
-        const keepRight = place.every((row, r) => 
-            row.every((seat, c) => {
-                if(seat === 'P'){
-                    if(inBound(r+1)){
-                        if(isPerson(r+1, c)) return false;
-                        if(isEmpty(r+1, c)){
-                            if(inBound(c+1) && isPerson(r+1, c+1)) return false;
-                            if(inBound(c-1) && isPerson(r+1, c-1)) return false;
-                            if(inBound(r+2) && isPerson(r+2, c)) return false;
-                        }
-                    }
-                    if(inBound(r-1)){
-                        if(isPerson(r-1, c)) return false;
-                        if(isEmpty(r-1, c)){
-                            if(inBound(c+1) && isPerson(r-1, c+1)) return false;
-                            if(inBound(c-1) && isPerson(r-1, c-1)) return false;
-                            if(inBound(r-2) && isPerson(r-2, c)) return false;
-                        }
-                    }
-                    if(inBound(c+1)){
-                        if(isPerson(r, c+1)) return false;
-                        if(isEmpty(r, c+1) && inBound(c+2) && isPerson(r, c+2)) return false;
-                    }
-                    if(inBound(c-1)){
-                        if(isPerson(r, c-1)) return false;
-                        if(isEmpty(r, c-1) && inBound(c-2) && isPerson(r, c-2)) return false;
-                    }
-                }
-                return true;
-            })
-        )
-        answer.push(keepRight ? 1 : 0);
-    }
-    
-    return answer;
+   const leng = places[0].length;
+   return places.map(v => {
+       let check = 1;
+       Loop2 :
+       for(let j = 0; j < leng; j++){
+           if(v[j].includes('PP') || v[j].includes('POP')) {
+               check = 0;
+               break;
+           }
+           for(let k = 0; k < leng; k++){
+               if(j < leng-2 && v[j][k]==='P' && 
+                  v[j+1][k]==="O" && v[j+2][k]==="P") {
+                       check = 0;
+                       break Loop2;
+               } // 세로 POP
+               else if(j < leng-1 && v[j][k]==='P' && v[j+1][k]==="P") {
+                       check = 0;
+                       break Loop2;
+               } // 세로 PP
+               else if(j < leng-1 && k < leng -1 && (v[j][k]==='P' && v[j+1][k+1]==='P') &&
+                      (v[j+1][k]==='O' || v[j][k+1]==='O')) {
+                       check = 0;
+                       break Loop2;
+               } // 대각선 PO  PX  PO
+                 //       OP  OP  XP
+               else if(j < leng-1 && k < leng -1 && (v[j][k+1]==='P' && v[j+1][k]==='P') &&
+                      (v[j][k]==='O' || v[j+1][k+1]==='O')) {
+                       check = 0;
+                       break Loop2;
+               } // 반대 대각선 OP  XP  OP
+                 //           PO  PO  PX
+           }
+       }
+       return check;
+   })
 }
