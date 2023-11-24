@@ -10,3 +10,6 @@ WHERE D.DURATION_TYPE='30일 이상' AND C.CAR_ID NOT IN (
 GROUP BY C.CAR_ID
 HAVING C.CAR_TYPE IN ('세단', 'SUV') AND (FEE>=500000 AND FEE<2000000) 
 ORDER BY FEE DESC, CAR_TYPE, CAR_ID DESC
+-- 대여 금액을 기준으로 내림차순 정렬하고,
+-- 대여 금액이 같은 경우 자동차 종류를 기준으로 오름차순 정렬, 
+-- 자동차 종류까지 같은 경우 자동차 ID를 기준으로 내림차순 정렬
